@@ -13,6 +13,7 @@
 #include <ostream>
 #include <chrono>
 #include <thread>
+#include <cassert>
 
 
 
@@ -829,7 +830,9 @@ void MainWindow::updateResult(std::array<lbShowData,4> rd)
         }else{
             lbForShow(&rd[0],startT1,0);
         }
-
+        recordChart1+=QString("%1,%2,%3 \n").arg(rd[0].innerTemp)
+                .arg(rd[0].outterTemp)
+                .arg(powerUsed);
         plot1Flow(rd[0].innerTemp,rd[0].outterTemp,powerUsed);
     }else{
         ui->pbIoOut1->setStyleSheet(offLed);
@@ -846,7 +849,9 @@ void MainWindow::updateResult(std::array<lbShowData,4> rd)
         }else{
             lbForShow(&rd[1],startT2,1);
         }
-
+        recordChart2+=QString("%1,%2,%3 \n").arg(rd[1].innerTemp)
+                .arg(rd[1].outterTemp)
+                .arg(powerUsed);
         plot2Flow(rd[1].innerTemp,rd[1].outterTemp,powerUsed);
     }else{
         ui->pbIoOut2->setStyleSheet(offLed);
@@ -863,7 +868,9 @@ void MainWindow::updateResult(std::array<lbShowData,4> rd)
         }else{
             lbForShow(&rd[2],startT3,2);
         }
-
+        recordChart3+=QString("%1,%2,%3 \n").arg(rd[2].innerTemp)
+                .arg(rd[2].outterTemp)
+                .arg(powerUsed);
         plot3Flow(rd[2].innerTemp,rd[2].outterTemp,powerUsed);
     }else{
         ui->pbIoOut3->setStyleSheet(offLed);
@@ -880,12 +887,38 @@ void MainWindow::updateResult(std::array<lbShowData,4> rd)
         }else{
             lbForShow(&rd[0],startT4,0);
         }
-
+        recordChart4+=QString("%1,%2,%3 \n").arg(rd[3].innerTemp)
+                .arg(rd[3].outterTemp)
+                .arg(powerUsed);
         plot4Flow(rd[3].innerTemp,rd[3].outterTemp,powerUsed);
     }else{
         ui->pbIoOut4->setStyleSheet(offLed);
     }
 
+}
+
+void MainWindow::writeStringToText(QString *txtStream)
+{
+    QString dataSaveAddress=QApplication::applicationDirPath()+"/Data/"+QDate::currentDate().toString("yyyyMMdd");
+    QDir dir;
+    if(!dir.exists(dataSaveAddress)){
+        bool makeDir=dir.mkdir(dataSaveAddress);
+        qDebug()<<"create save file address..."<<makeDir<<"..."<<dataSaveAddress;
+    }
+//    QString fname=dataSaveAddress+"/"+QString::number(productId)+".txt";
+    QString fname=QString("%1/%2.txt").arg(dataSaveAddress).arg(productId);
+    QFile   file(fname);
+    if(!file.exists()){
+        qDebug()<<"file not exist";
+    }
+
+    if(!file.open(QIODevice::WriteOnly|QIODevice::Text|QIODevice::Append)){
+        qDebug()<<fname<<"is have error";
+    }
+    QTextStream stream(&file);
+    stream<<*txtStream<<"\n";
+    file.close();
+    *txtStream="";
 }
 
 

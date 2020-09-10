@@ -9,473 +9,380 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="483"/>
-        <source>yd test write</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="358"/>
-        <source>yd test read</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="395"/>
-        <source>TextLabel</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="526"/>
-        <source>3 Inch</source>
-        <oldsource>3 寸</oldsource>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="533"/>
-        <source>3.5 Inch</source>
-        <oldsource>3.5 寸</oldsource>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="165"/>
+        <location filename="mainwindow.ui" line="343"/>
         <source>-----</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="351"/>
-        <source>1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="178"/>
-        <source>4</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="53"/>
-        <source>3</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="452"/>
-        <source>2</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="549"/>
-        <source>Worker</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="503"/>
-        <source>Type</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="509"/>
-        <source>vacuum</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="519"/>
-        <source>heat preservation</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="432"/>
+        <location filename="mainwindow.ui" line="492"/>
         <source>Report</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="251"/>
+        <location filename="mainwindow.ui" line="322"/>
         <source>Exit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="101"/>
+        <location filename="mainwindow.ui" line="413"/>
         <source>Time</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="408"/>
+        <location filename="mainwindow.ui" line="363"/>
         <source>Out C</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="217"/>
+        <location filename="mainwindow.ui" line="157"/>
         <source>Pipe No.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="234"/>
-        <source>Working Step</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="469"/>
+        <location filename="mainwindow.ui" line="181"/>
         <source>Hot Power Kw</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="23"/>
+        <location filename="mainwindow.ui" line="635"/>
         <source>Result</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="305"/>
+        <location filename="mainwindow.ui" line="52"/>
         <source>What&apos;s Level</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="30"/>
+        <location filename="mainwindow.ui" line="24"/>
+        <location filename="mainwindow.ui" line="100"/>
+        <location filename="mainwindow.ui" line="202"/>
+        <location filename="mainwindow.ui" line="531"/>
+        <source>150</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="29"/>
+        <location filename="mainwindow.ui" line="105"/>
+        <location filename="mainwindow.ui" line="207"/>
+        <location filename="mainwindow.ui" line="536"/>
+        <source>200</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="34"/>
+        <location filename="mainwindow.ui" line="110"/>
+        <location filename="mainwindow.ui" line="212"/>
+        <location filename="mainwindow.ui" line="541"/>
+        <source>250</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="39"/>
+        <location filename="mainwindow.ui" line="115"/>
+        <location filename="mainwindow.ui" line="217"/>
+        <location filename="mainwindow.ui" line="546"/>
+        <source>300</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="44"/>
+        <location filename="mainwindow.ui" line="120"/>
+        <location filename="mainwindow.ui" line="222"/>
+        <location filename="mainwindow.ui" line="551"/>
+        <source>350</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="59"/>
         <source>Inner C</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="40"/>
-        <location filename="mainwindow.ui" line="63"/>
-        <location filename="mainwindow.ui" line="70"/>
-        <location filename="mainwindow.ui" line="77"/>
-        <location filename="mainwindow.ui" line="87"/>
-        <location filename="mainwindow.ui" line="94"/>
-        <location filename="mainwindow.ui" line="111"/>
-        <location filename="mainwindow.ui" line="118"/>
-        <location filename="mainwindow.ui" line="135"/>
-        <location filename="mainwindow.ui" line="158"/>
-        <location filename="mainwindow.ui" line="188"/>
-        <location filename="mainwindow.ui" line="198"/>
-        <location filename="mainwindow.ui" line="224"/>
-        <location filename="mainwindow.ui" line="244"/>
-        <location filename="mainwindow.ui" line="261"/>
-        <location filename="mainwindow.ui" line="271"/>
-        <location filename="mainwindow.ui" line="281"/>
-        <location filename="mainwindow.ui" line="291"/>
-        <location filename="mainwindow.ui" line="298"/>
-        <location filename="mainwindow.ui" line="325"/>
-        <location filename="mainwindow.ui" line="335"/>
-        <location filename="mainwindow.ui" line="368"/>
-        <location filename="mainwindow.ui" line="375"/>
-        <location filename="mainwindow.ui" line="382"/>
-        <location filename="mainwindow.ui" line="415"/>
-        <location filename="mainwindow.ui" line="439"/>
-        <location filename="mainwindow.ui" line="476"/>
-        <location filename="mainwindow.ui" line="490"/>
+        <location filename="mainwindow.ui" line="69"/>
+        <location filename="mainwindow.ui" line="92"/>
+        <location filename="mainwindow.ui" line="131"/>
+        <location filename="mainwindow.ui" line="167"/>
+        <location filename="mainwindow.ui" line="174"/>
+        <location filename="mainwindow.ui" line="259"/>
+        <location filename="mainwindow.ui" line="269"/>
+        <location filename="mainwindow.ui" line="279"/>
+        <location filename="mainwindow.ui" line="302"/>
+        <location filename="mainwindow.ui" line="329"/>
+        <location filename="mainwindow.ui" line="336"/>
+        <location filename="mainwindow.ui" line="350"/>
+        <location filename="mainwindow.ui" line="373"/>
+        <location filename="mainwindow.ui" line="406"/>
+        <location filename="mainwindow.ui" line="445"/>
+        <location filename="mainwindow.ui" line="452"/>
+        <location filename="mainwindow.ui" line="478"/>
+        <location filename="mainwindow.ui" line="485"/>
+        <location filename="mainwindow.ui" line="503"/>
+        <location filename="mainwindow.ui" line="513"/>
+        <location filename="mainwindow.ui" line="596"/>
+        <location filename="mainwindow.ui" line="607"/>
+        <location filename="mainwindow.ui" line="614"/>
+        <location filename="mainwindow.ui" line="628"/>
         <source>---</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="567"/>
-        <source>No. 1</source>
+        <location filename="mainwindow.ui" line="138"/>
+        <source>开始计算3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="577"/>
-        <source>No. 2</source>
+        <location filename="mainwindow.ui" line="194"/>
+        <source>9</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="587"/>
-        <source>No. 3</source>
+        <location filename="mainwindow.ui" line="230"/>
+        <source>功率通讯口</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="597"/>
-        <source>No. 4</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="607"/>
-        <source>No. His</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="634"/>
-        <source>toolBar</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="656"/>
-        <source>connect485</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="665"/>
-        <source>optionSys</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="674"/>
-        <source>Disconnect485</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="683"/>
-        <source>ChnLag</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="692"/>
-        <source>JpnLag</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="701"/>
-        <source>EngLag</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="mainwindow.cpp" line="71"/>
-        <location filename="mainwindow.cpp" line="104"/>
-        <location filename="mainwindow.cpp" line="138"/>
-        <location filename="mainwindow.cpp" line="171"/>
-        <source>Inner Temp</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="mainwindow.cpp" line="72"/>
-        <location filename="mainwindow.cpp" line="105"/>
-        <location filename="mainwindow.cpp" line="139"/>
-        <location filename="mainwindow.cpp" line="172"/>
-        <source>Outer Temp</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="mainwindow.cpp" line="73"/>
-        <location filename="mainwindow.cpp" line="106"/>
-        <location filename="mainwindow.cpp" line="140"/>
-        <location filename="mainwindow.cpp" line="173"/>
-        <source>Total Power</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="mainwindow.cpp" line="332"/>
-        <source>waiting for start</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="mainwindow.cpp" line="335"/>
-        <source>HEATING...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="mainwindow.cpp" line="338"/>
-        <source>calculate Done and test OVER</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="mainwindow.cpp" line="492"/>
-        <location filename="mainwindow.cpp" line="510"/>
-        <source>Do you start NOW</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="mainwindow.cpp" line="493"/>
-        <source>YES:: go heating .
- NO: DONOT HEATING</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="mainwindow.cpp" line="503"/>
-        <source>Do you CALCULATE</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="mainwindow.cpp" line="504"/>
-        <source>YES:: go calculate .
- NO: DONOT calculate</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="mainwindow.cpp" line="511"/>
-        <source>YES:: go wait,and save result .
- NO: DONOT SAVE RESULT</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="mainwindow.cpp" line="526"/>
-        <source>open ?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="mainwindow.cpp" line="526"/>
-        <source>close ?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="mainwindow.cpp" line="526"/>
-        <source>start or stop 2#</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>systemDlg</name>
-    <message>
-        <location filename="systemdlg.ui" line="14"/>
-        <source>Dialog</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="systemdlg.ui" line="20"/>
-        <source>serial Parameters POWER</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="systemdlg.ui" line="26"/>
-        <source>Parity</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="systemdlg.ui" line="33"/>
-        <source>Band Rate</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="systemdlg.ui" line="40"/>
-        <source>Data Bits</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="systemdlg.ui" line="47"/>
-        <source>Stop Bits</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="systemdlg.ui" line="55"/>
-        <source>No</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="systemdlg.ui" line="60"/>
-        <source>Even</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="systemdlg.ui" line="65"/>
-        <source>Odd</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="systemdlg.ui" line="70"/>
-        <source>Space</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="systemdlg.ui" line="75"/>
-        <source>Mark</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="systemdlg.ui" line="84"/>
-        <source>4800</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="systemdlg.ui" line="89"/>
-        <source>9600</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="systemdlg.ui" line="94"/>
-        <source>19200</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="systemdlg.ui" line="103"/>
-        <source>5</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="systemdlg.ui" line="108"/>
-        <source>6</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="systemdlg.ui" line="113"/>
-        <source>7</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="systemdlg.ui" line="118"/>
+        <location filename="mainwindow.ui" line="292"/>
         <source>8</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="systemdlg.ui" line="127"/>
-        <source>1</source>
+        <location filename="mainwindow.ui" line="520"/>
+        <source>开始计算2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="systemdlg.ui" line="132"/>
-        <source>3</source>
+        <location filename="mainwindow.ui" line="559"/>
+        <source>开始计算1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="systemdlg.ui" line="137"/>
-        <source>2</source>
+        <location filename="mainwindow.ui" line="576"/>
+        <source>开始计算4</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="systemdlg.ui" line="145"/>
-        <source>Port</source>
+        <location filename="mainwindow.ui" line="589"/>
+        <source>宇电通讯口</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="systemdlg.ui" line="153"/>
-        <source>COM1</source>
+        <location filename="mainwindow.ui" line="621"/>
+        <source>set tempe</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="systemdlg.ui" line="158"/>
-        <source>COM2</source>
+        <location filename="mainwindow.ui" line="642"/>
+        <source>Now Set C</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="systemdlg.ui" line="163"/>
-        <source>COM3</source>
+        <location filename="mainwindow.ui" line="652"/>
+        <location filename="mainwindow.ui" line="659"/>
+        <location filename="mainwindow.ui" line="669"/>
+        <location filename="mainwindow.ui" line="676"/>
+        <source>----</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="systemdlg.ui" line="168"/>
-        <source>COM4</source>
+        <location filename="mainwindow.ui" line="694"/>
+        <source>No. 1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="systemdlg.ui" line="173"/>
-        <source>COM5</source>
+        <location filename="mainwindow.ui" line="704"/>
+        <source>No. 2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="systemdlg.ui" line="178"/>
-        <source>COM6</source>
+        <location filename="mainwindow.ui" line="714"/>
+        <source>No. 3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="systemdlg.ui" line="183"/>
-        <source>COM7</source>
+        <location filename="mainwindow.ui" line="724"/>
+        <source>No. 4</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="systemdlg.ui" line="188"/>
-        <source>COM8</source>
+        <location filename="mainwindow.ui" line="734"/>
+        <source>No. His</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="systemdlg.ui" line="201"/>
-        <source>Response Timeout</source>
+        <location filename="mainwindow.ui" line="761"/>
+        <source>toolBar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="systemdlg.ui" line="208"/>
-        <source>ms</source>
+        <location filename="mainwindow.ui" line="783"/>
+        <source>connect485</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="systemdlg.ui" line="231"/>
-        <source>Number of retries</source>
+        <location filename="mainwindow.ui" line="792"/>
+        <source>optionSys</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="systemdlg.ui" line="256"/>
-        <source>aplay</source>
+        <location filename="mainwindow.ui" line="801"/>
+        <source>Disconnect485</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="810"/>
+        <source>ChnLag</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="819"/>
+        <source>JpnLag</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="828"/>
+        <source>EngLag</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="116"/>
+        <location filename="mainwindow.cpp" line="151"/>
+        <location filename="mainwindow.cpp" line="188"/>
+        <location filename="mainwindow.cpp" line="225"/>
+        <source>Inner Temp</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="117"/>
+        <location filename="mainwindow.cpp" line="152"/>
+        <location filename="mainwindow.cpp" line="189"/>
+        <location filename="mainwindow.cpp" line="226"/>
+        <source>Outer Temp</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="118"/>
+        <location filename="mainwindow.cpp" line="153"/>
+        <location filename="mainwindow.cpp" line="190"/>
+        <location filename="mainwindow.cpp" line="227"/>
+        <source>Total Power</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="711"/>
+        <location filename="mainwindow.cpp" line="739"/>
+        <location filename="mainwindow.cpp" line="768"/>
+        <location filename="mainwindow.cpp" line="797"/>
+        <source>STOP HEAT</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="712"/>
+        <location filename="mainwindow.cpp" line="740"/>
+        <location filename="mainwindow.cpp" line="769"/>
+        <location filename="mainwindow.cpp" line="798"/>
+        <source>YES:: go temperature 0 .
+ NO: DONOT HEATING</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="708"/>
+        <location filename="mainwindow.cpp" line="736"/>
+        <location filename="mainwindow.cpp" line="765"/>
+        <location filename="mainwindow.cpp" line="794"/>
+        <source>Do you start NOW</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="709"/>
+        <location filename="mainwindow.cpp" line="737"/>
+        <location filename="mainwindow.cpp" line="766"/>
+        <location filename="mainwindow.cpp" line="795"/>
+        <source>YES:: go heating .
+ NO: DONOT HEATING</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Setting</name>
+    <message>
+        <location filename="setting.ui" line="14"/>
+        <source>Dialog</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="setting.ui" line="24"/>
+        <source>名称</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="setting.ui" line="31"/>
+        <source>加热效率</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="setting.ui" line="38"/>
+        <source>更改</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="setting.ui" line="45"/>
+        <source>隔热管内径(mm)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="setting.ui" line="52"/>
+        <source>高温设定(°C)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="setting.ui" line="76"/>
+        <source>删除</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="setting.ui" line="83"/>
+        <source>114*76</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="setting.ui" line="103"/>
+        <source>加热棒长度(mm)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="setting.ui" line="110"/>
+        <source>添加</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="setting.ui" line="117"/>
+        <source>隔热管外径(mm)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="setting.ui" line="127"/>
+        <source>应用</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="setting.ui" line="196"/>
+        <source>addItem</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="setting.ui" line="201"/>
+        <source>deleteItem</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="setting.ui" line="206"/>
+        <source>alterItem</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="setting.ui" line="211"/>
+        <source>useItem</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

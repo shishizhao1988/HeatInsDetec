@@ -54,7 +54,7 @@ private:
     int readMdb(quint8 address,int dataAddress);
     void wtMdb(int address,int value);
     void updateResult(const std::array<lbShowData,4> rd);
-
+    void writeStringToText(QString* txtStream);
 signals:
     void readDone();
     void serialIsDiscnt();
@@ -124,7 +124,7 @@ private:
     lbShowData *test1lbShow,*test2lbShow,*test3lbShow,*test4lbShow;
     int enableCal;
     double calculResult1,calculResult2,calculResult3,calculResult4;
-
+    int productId;
     QCustomPlot *plotTest1;
     QCustomPlot *plotTest2;
     QCustomPlot *plotTest3;
@@ -157,6 +157,7 @@ private:
     int  wtAddress,wtValue;
     QString readmsg;
     QString onLed,offLed;
+    QString recordChart1,recordChart2,recordChart3,recordChart4;
 
     QMessageBox* mmessageBox;
     QTranslator tLag;
