@@ -14,7 +14,7 @@ findHistory::findHistory(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    m_cuse=new commenUse();
+//    m_cuse=new commenUse();
     m_rdata=new ReportData();
     grfAddress=QApplication::applicationDirPath();
     ui->tableView->setAlternatingRowColors(true);
@@ -59,19 +59,17 @@ void findHistory::on_pbFindByDay_clicked()
 void findHistory::updateTableView()
 {
     model->setHeaderData(0,Qt::Horizontal,QStringLiteral("序号"));
-    model->setHeaderData(1,Qt::Horizontal,QStringLiteral("送检单位"));
-    model->setHeaderData(2,Qt::Horizontal,QStringLiteral("检测人员"));
-    model->setHeaderData(3,Qt::Horizontal,QStringLiteral("检测日期"));
-    model->setHeaderData(4,Qt::Horizontal,QStringLiteral("检测时间"));
-    model->setHeaderData(5,Qt::Horizontal,QStringLiteral("高压设定"));
-    model->setHeaderData(6,Qt::Horizontal,QStringLiteral("保压时间"));
-    model->setHeaderData(7,Qt::Horizontal,QStringLiteral("允许压降"));
-    model->setHeaderData(8,Qt::Horizontal,QStringLiteral("综合压降"));
-    model->setHeaderData(9,Qt::Horizontal,QStringLiteral("公扣状态"));
-    model->setHeaderData(10,Qt::Horizontal,QStringLiteral("母扣状态"));
-    model->setHeaderData(11,Qt::Horizontal,QStringLiteral("油管规格"));
-    model->setHeaderData(12,Qt::Horizontal,QStringLiteral("生产编号"));
-    model->setHeaderData(13,Qt::Horizontal,QStringLiteral("数据地址"));
+    model->setHeaderData(1,Qt::Horizontal,QStringLiteral("生产编号"));
+    model->setHeaderData(2,Qt::Horizontal,QStringLiteral("日期"));
+    model->setHeaderData(3,Qt::Horizontal,QStringLiteral("时间"));
+    model->setHeaderData(4,Qt::Horizontal,QStringLiteral("名称"));
+    model->setHeaderData(5,Qt::Horizontal,QStringLiteral("加热效率"));
+    model->setHeaderData(6,Qt::Horizontal,QStringLiteral("高温设定"));
+    model->setHeaderData(7,Qt::Horizontal,QStringLiteral("内径"));
+    model->setHeaderData(8,Qt::Horizontal,QStringLiteral("外径"));
+    model->setHeaderData(9,Qt::Horizontal,QStringLiteral("加热长度"));
+    model->setHeaderData(10,Qt::Horizontal,QStringLiteral("数据"));
+
     ui->tableView->setModel(model);
 }
 
@@ -79,19 +77,17 @@ void findHistory::getrdByid(int id)
 {
     m_rdata=new ReportData;
     m_rdata->id=model->index(id,0).data().toInt();
-    m_rdata->workFor=model->index(id,1).data().toString();
-    m_rdata->jcry=model->index(id,2).data().toString();
-    m_rdata->workDay=model->index(id,3).data().toString();
-    m_rdata->workTime=model->index(id,4).data().toString();
-    m_rdata->setHighPress=model->index(id,5).data().toInt();
-    m_rdata->pressTimeLong=model->index(id,6).data().toInt();
-    m_rdata->setDifPress=model->index(id,7).data().toInt();
-    m_rdata->difPress=model->index(id,8).data().toInt();
-    m_rdata->famaleResult=model->index(id,9).data().toInt();
-    m_rdata->maleResult=model->index(id,10).data().toInt();
-    m_rdata->workType=model->index(id,11).data().toString();
-    m_rdata->workId=model->index(id,12).data().toString();
-    m_rdata->dataAddress=model->index(id,13).data().toString();
+    m_rdata->productId=model->index(id,1).data().toString();
+    m_rdata->day=model->index(id,2).data().toString();
+    m_rdata->time=model->index(id,3).data().toString();
+    m_rdata->name=model->index(id,4).data().toString();
+    m_rdata->heatRatio=model->index(id,5).data().toInt();
+    m_rdata->highT=model->index(id,6).data().toInt();
+    m_rdata->innerC=model->index(id,7).data().toInt();
+    m_rdata->outterC=model->index(id,8).data().toInt();
+    m_rdata->heatL=model->index(id,9).data().toInt();
+    m_rdata->dataAddress=model->index(id,10).data().toString();
+
 }
 
 void findHistory::on_pbPrint_clicked()
@@ -144,44 +140,35 @@ void findHistory::setValue(const int recNo, const QString paramName, QVariant &p
     Q_UNUSED(reportPage)
     Q_UNUSED(recNo)
 
-    if (paramName == "id") {
-        paramValue = m_rdata->id;
-    }
-    if (paramName == "sjdw") {
-        paramValue = m_rdata->workFor;
-    }
-    if (paramName == "jcry") {
-        paramValue = m_rdata->jcry;
+    if (paramName == "productId") {
+        paramValue = m_rdata->productId;
     }
     if (paramName == "day") {
-        paramValue = m_rdata->workDay;
+        paramValue = m_rdata->day;
     }
     if (paramName == "time") {
-        paramValue = m_rdata->workTime;
+        paramValue = m_rdata->time;
     }
-    if (paramName == "gysd") {
-        paramValue = m_rdata->setHighPress;
+    if (paramName == "name") {
+        paramValue = m_rdata->name;
     }
-    if (paramName == "bysj") {
-        paramValue = m_rdata->pressTimeLong;
+    if (paramName == "heatRatio") {
+        paramValue = m_rdata->heatRatio;
     }
-    if (paramName == "yxyj") {
-        paramValue = m_rdata->setDifPress;
+    if (paramName == "highT") {
+        paramValue = m_rdata->highT;
     }
-    if (paramName == "yajiang") {
-        paramValue = m_rdata->difPress;
+    if (paramName == "innerC") {
+        paramValue = m_rdata->innerC;
     }
-    if (paramName == "gkjg") {
-        paramValue = m_rdata->famaleResult;
+    if (paramName == "outterC") {
+        paramValue = m_rdata->outterC;
     }
-    if (paramName == "mkjg") {
-        paramValue = m_rdata->maleResult;
+    if (paramName == "heatL") {
+        paramValue = m_rdata->heatL;
     }
-    if (paramName == "guige") {
-        paramValue = m_rdata->workType;
-    }
-    if (paramName == "scbh") {
-        paramValue = m_rdata->workId;
+    if (paramName == "dataAddress") {
+        paramValue = m_rdata->dataAddress;
     }
 }
 
@@ -190,44 +177,33 @@ void findHistory::setAllValue(const int recNo, const QString paramName, QVariant
     Q_UNUSED(reportPage)
     getrdByid(recNo);
 
-    if (paramName == "id") {
-        paramValue = m_rdata->id;
+
+    if (paramName == "productId") {
+        paramValue = m_rdata->productId;
     }
-    if (paramName == "sjdw") {
-        paramValue = m_rdata->workFor;
+    if (paramName == "day") {
+        paramValue = m_rdata->day;
     }
-    if (paramName == "jcry") {
-        paramValue = m_rdata->jcry;
+    if (paramName == "time") {
+        paramValue = m_rdata->time;
     }
-    if (paramName == "jcrq") {
-        paramValue = m_rdata->workDay;
+    if (paramName == "name") {
+        paramValue = m_rdata->name;
     }
-    if (paramName == "jcsj") {
-        paramValue = m_rdata->workTime;
+    if (paramName == "heatRatio") {
+        paramValue = m_rdata->heatRatio;
     }
-    if (paramName == "gysd") {
-        paramValue = m_rdata->setHighPress;
+    if (paramName == "highT") {
+        paramValue = m_rdata->highT;
     }
-    if (paramName == "bysj") {
-        paramValue = m_rdata->pressTimeLong;
+    if (paramName == "innerC") {
+        paramValue = m_rdata->innerC;
     }
-    if (paramName == "yxyj") {
-        paramValue = m_rdata->setDifPress;
+    if (paramName == "outterC") {
+        paramValue = m_rdata->outterC;
     }
-    if (paramName == "yajiang") {
-        paramValue = m_rdata->difPress;
-    }
-    if (paramName == "gkzt") {
-        paramValue = m_rdata->famaleResult;
-    }
-    if (paramName == "mkzt") {
-        paramValue = m_rdata->maleResult;
-    }
-    if (paramName == "guige") {
-        paramValue = m_rdata->workType;
-    }
-    if (paramName == "scbh") {
-        paramValue = m_rdata->workId;
+    if (paramName == "heatL") {
+        paramValue = m_rdata->heatL;
     }
 }
 
@@ -246,28 +222,53 @@ void findHistory::setChart(RptFieldObject &fieldObject, QChart &chart)
 
     QFileInfo fileIsHave(m_rdata->dataAddress);
     if(fileIsHave.exists()==true){
-        chartData=m_cuse->readFileAllData(m_rdata->dataAddress);
+        chartData=readFileAllData(m_rdata->dataAddress);
     }else{
         QMessageBox::information(nullptr,"ERROR",QStringLiteral("数据不存在"));
     }
 
-    chart.removeAllSeries();
+    auto series1 = new QLineSeries();
+    auto series2 = new QLineSeries();
+    auto series3 = new QLineSeries();
+
+    series1->setProperty("graphDS", "1");
+    series2->setProperty("graphDS", "1");
+    series3->setProperty("graphDS", "1");
+
+    for (int i = 0; i < chartData.size(); ++i) {
+        if(chartData[i].size()==3){
+            series1->append(i,chartData[i][0]);
+            series2->append(i,chartData[i][1]);
+            series3->append(i,chartData[i][2]);
+        }
+    }
+    series1->setColor(Qt::red);
+    series2->setColor(Qt::blue);
+    series3->setColor(Qt::black);
+
+    series1->setName(QString("Series #%1").arg(chart.series().size()));
 
     if (fieldObject.name == "diagram1") {
-        auto series = new QLineSeries();
-        series->setProperty("graphDS", "1");
-
-        for (int i = 0; i < chartData.size(); ++i) {
-            series->append(i,chartData[i]);
-        }
-        series->setColor(Qt::red);
-        series->setName(QString("Series #%1").arg(chart.series().size()));
-
-        chart.addSeries(series);
+        chart.removeAllSeries();
+        chart.addSeries(series1);
         chart.createDefaultAxes();
         chart.axisX()->setTitleText(QString("x [s]"));
-        chart.axisY()->setTitleText(QString("y [MPa]"));
-        //        chart.setTitle("xxx");
+        chart.axisY()->setTitleText(QString("y [C]"));
+    }
+
+    if (fieldObject.name == "diagram2") {
+        chart.removeAllSeries();
+        chart.addSeries(series2);
+        chart.createDefaultAxes();
+        chart.axisX()->setTitleText(QString("x [s]"));
+        chart.axisY()->setTitleText(QString("y [C]"));
+    }
+    if (fieldObject.name == "diagram3") {
+        chart.removeAllSeries();
+        chart.addSeries(series3);
+        chart.createDefaultAxes();
+        chart.axisX()->setTitleText(QString("x [s]"));
+        chart.axisY()->setTitleText(QString("y [C]"));
     }
 
     QFont font=chart.titleFont();

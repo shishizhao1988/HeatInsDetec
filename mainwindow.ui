@@ -71,7 +71,7 @@
        </widget>
       </item>
       <item row="3" column="0">
-       <widget class="QLineEdit" name="lineEdit_2">
+       <widget class="QLineEdit" name="leproducId1">
         <property name="maximumSize">
          <size>
           <width>90</width>
@@ -304,7 +304,7 @@
        </widget>
       </item>
       <item row="5" column="0">
-       <widget class="QLineEdit" name="lineEdit_4">
+       <widget class="QLineEdit" name="leproducId3">
         <property name="maximumSize">
          <size>
           <width>90</width>
@@ -384,7 +384,7 @@
        </widget>
       </item>
       <item row="6" column="0">
-       <widget class="QLineEdit" name="lineEdit_3">
+       <widget class="QLineEdit" name="leproducId4">
         <property name="maximumSize">
          <size>
           <width>90</width>
@@ -547,7 +547,7 @@ color: rgb(255, 0, 0);</string>
        </widget>
       </item>
       <item row="4" column="0">
-       <widget class="QLineEdit" name="lineEdit_5">
+       <widget class="QLineEdit" name="leproducId2">
         <property name="maximumSize">
          <size>
           <width>90</width>
@@ -671,7 +671,7 @@ color: rgb(255, 0, 0);</string>
        </widget>
       </item>
       <item row="1" column="10">
-       <widget class="QPushButton" name="pushButton_2">
+       <widget class="QPushButton" name="pbReport">
         <property name="text">
          <string>Report</string>
         </property>

@@ -10,8 +10,9 @@
 
 #include <QDateTime>
 #include <QPicture>
+#include <vector>
 
-#include "commenuse.h"
+//#include "commenuse.h"
 #include "qtrpt.h"
 #include "report/chart.h"
 
@@ -21,22 +22,20 @@ namespace Ui {
 class findHistory;
 }
 
+using  vvd=vector<vector<double>> ;
+
 struct ReportData
 {
     int id;
-    QString workFor;
-    QString workType;
-    QString workId;
-    QString workDay;
-    QString workTime;
-    QString jcry;
-    int     setHighPress;
-    int     setDifPress;
-    int     difPress;
-    int     pressTimeLong;
-
-    QString famaleResult;
-    QString maleResult;
+    QString productId;
+    QString day;
+    QString time;
+    QString name;
+    int heatRatio;
+    int highT;
+    int innerC;
+    int     outterC;
+    int     heatL;
     QString dataAddress;
 
 };
@@ -74,13 +73,32 @@ private:
     QSqlDatabase database;
 
     QString grfAddress;
-    vector<double> chartData;
+    vvd chartData;
     ReportData *m_rdata;
 
 private:
     void updateTableView();
     void getrdByid(int id);
-    commenUse *m_cuse;
+    vvd readFileAllData(QString fileAddr){
+        QFile fileIn(fileAddr);
+        vvd dReaddata;
+        if(!fileIn.open(QIODevice::ReadOnly)){
+            qDebug()<<"Error";
+            return dReaddata;
+        }
+        QTextStream in(&fileIn);
+
+        while (!in.atEnd()) {
+            QVector<QString> strcolData= in.readLine().split(",").toVector();
+            vector<double> dcolData;
+            std::transform(strcolData.begin(),strcolData.end(),std::back_inserter(dcolData),
+                           [](const QString& str){return str.toDouble();});
+            dReaddata.push_back(dcolData);
+        }
+        fileIn.close();
+        return dReaddata;
+    }
+    //    commenUse *m_cuse;
 
 };
 

@@ -2,6 +2,10 @@
 #define DATATYPE_H
 
 #include <QTimer>
+#include <QString>
+#include <QFile>
+#include <QLineSeries>
+#include <QDebug>
 
 enum heatFlowStep{
     noRun,

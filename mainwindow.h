@@ -7,12 +7,14 @@
 #include <array>
 #include <QModbusDataUnit>
 #include <QModbusClient>
+#include <QSqlDatabase>
 
 #include "qcustomplot.h"
 #include "axistag.h"
 #include "setting.h"
 #include "getmdbdata.h"
 #include "dataType.h"
+#include "findhistory.h"
 #include "AIBUSProtocol/aibus_Frame.h"
 #include "AIBUSProtocol/aibusprotocol.h"
 #include <QMetaType>
@@ -55,6 +57,13 @@ private:
     void wtMdb(int address,int value);
     void updateResult(const std::array<lbShowData,4> rd);
     void writeStringToText(QString* txtStream);
+    void initSql();
+    void insertResultSql(QString userproductId);
+    QString     dataSaveAddress;
+    QString     writeDataForTxt;
+    QSqlDatabase database;
+    QDateTime startWPTime;
+
 signals:
     void readDone();
     void serialIsDiscnt();
@@ -107,7 +116,7 @@ private:
     Ui::MainWindow *ui;
     Setting         *m_setting;
     SysSetData *m_setData;
-
+    findHistory     *m_findh;
 
 
     QPointer<QCPGraph> pt1mGraph1;
@@ -163,7 +172,6 @@ private:
     QString readmsg;
     QString onLed,offLed;
     QString recordChart1,recordChart2,recordChart3,recordChart4;
-
     QMessageBox* mmessageBox;
     QTranslator tLag;
 //    GetMdbDataThread *gmdWork;

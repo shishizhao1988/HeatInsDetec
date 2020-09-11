@@ -14,12 +14,14 @@
 #include <chrono>
 #include <thread>
 #include <cassert>
+#include <QSqlQuery>
 
 
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
+    ,productId(0)
     , dataTimer(new QTimer())
     ,modbusDevice(nullptr)
     , m_aibus(new CAiBusProtocol())
@@ -27,6 +29,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     qRegisterMetaType<std::array<lbShowData,4>>("std::array<lbShowData,4>");
     m_setting=new Setting();
+    m_findh=new findHistory(this);
 
     m_setData=m_setting->sysSettings();
     modbusDevice=new QModbusRtuSerialMaster(this);
@@ -43,6 +46,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     aiPortOpen();
     mdbPortOpen();
+    initSql();
 }
 
 MainWindow::~MainWindow()
@@ -256,6 +260,8 @@ void MainWindow::initAction()
             this,&MainWindow::twoPortClose);
     connect(this,&MainWindow::changePort,
             m_setting,&Setting::updatePort);
+    connect(ui->pbReport,&QPushButton::clicked,
+            m_findh,&findHistory::showMaximized);
     connect(ui->pbExit,&QPushButton::clicked,this,&MainWindow::exitExt);
     connect(ui->actionoptionSys,&QAction::triggered,m_setting,&QDialog::show);
     connect(dataTimer,SIGNAL(timeout()),this,SLOT(timerRW()));
@@ -670,13 +676,6 @@ void MainWindow::mdbReadReady()
         default:
             break;
         }
-
-        //        qDebug()<<QString("hotPower1: %1 ,hotPower2 : %2 ,hotPower3 : %3 ,hotPower4 : %4 ,address is : %5")
-        //                  .arg(recData485[0].totalPower)
-        //                  .arg(recData485[1].totalPower)
-        //                  .arg(recData485[2].totalPower)
-        //                  .arg(recData485[3].totalPower)
-        //                  .arg(reply->serverAddress());
     }else{
         qDebug()<<"error read response : "<<reply->errorString();
     }
@@ -719,14 +718,18 @@ void MainWindow::on_pbIoOut1_clicked()
 
     if(mmessageBox->information(this,msgTitle,msgText,QMessageBox::Yes|QMessageBox::No)==QMessageBox::Yes){
         if(!isOpen1){
+            productId++;
             startT1=new QTime;
             startT1->start();
+            startWPTime=QDateTime::currentDateTime();
             ui->cbableCalcul1->setCheckState(Qt::Unchecked);
             averageKWstrat1=recData485[0].totalPower;
             if(yudianPort) wtMdb(10,m_setData->HighTempe.toDouble()*10);
             isOpen1=true;
         }else{
             if(yudianPort) wtMdb(10,0);
+            writeStringToText(&recordChart1);
+            insertResultSql(ui->leproducId1->text());
             isOpen1=false;
         }
     }
@@ -748,6 +751,7 @@ void MainWindow::on_pbIoOut2_clicked()
     if(mmessageBox->information(this,msgTitle,msgText,QMessageBox::Yes|QMessageBox::No)==QMessageBox::Yes){
 
         if(!isOpen2){
+            productId++;
             startT2=new QTime;
             startT2->start();
             ui->cbableCalcul2->setCheckState(Qt::Unchecked);
@@ -756,7 +760,10 @@ void MainWindow::on_pbIoOut2_clicked()
             isOpen2=true;
         }else{
             if(yudianPort) wtMdb(11,0);
+            writeStringToText(&recordChart1);
             isOpen2=false;
+            insertResultSql(ui->leproducId2->text());
+
         }
     }
 }
@@ -777,6 +784,7 @@ void MainWindow::on_pbIoOut3_clicked()
     if(mmessageBox->information(this,msgTitle,msgText,QMessageBox::Yes|QMessageBox::No)==QMessageBox::Yes){
 
         if(!isOpen3){
+            productId++;
             startT3=new QTime;
             startT3->start();
             ui->cbableCalcul3->setCheckState(Qt::Unchecked);
@@ -785,7 +793,10 @@ void MainWindow::on_pbIoOut3_clicked()
             isOpen3=true;
         }else{
             if(yudianPort) wtMdb(12,0);
+            writeStringToText(&recordChart1);
             isOpen3=false;
+            insertResultSql(ui->leproducId3->text());
+
         }
     }
 }
@@ -806,6 +817,7 @@ void MainWindow::on_pbIoOut4_clicked()
     if(mmessageBox->information(this,msgTitle,msgText,QMessageBox::Yes|QMessageBox::No)==QMessageBox::Yes){
 
         if(!isOpen4){
+            productId++;
             startT4=new QTime;
             startT4->start();
             ui->cbableCalcul4->setCheckState(Qt::Unchecked);
@@ -814,7 +826,10 @@ void MainWindow::on_pbIoOut4_clicked()
             isOpen4=true;
         }else{
             if(yudianPort) wtMdb(13,0);
+            writeStringToText(&recordChart1);
             isOpen4=false;
+            insertResultSql(ui->leproducId4->text());
+
         }
     }
 }
@@ -834,9 +849,9 @@ void MainWindow::updateResult(std::array<lbShowData,4> rd)
         }else{
             lbForShow(&rd[0],startT1,0);
         }
-        recordChart1+=QString("%1,%2,%3 \n").arg(rd[0].innerTemp)
+        recordChart1.append(QString("%1,%2,%3 \n").arg(rd[0].innerTemp)
                 .arg(rd[0].outterTemp)
-                .arg(powerUsed);
+                .arg(powerUsed));
         plot1Flow(rd[0].innerTemp,rd[0].outterTemp,powerUsed);
     }else{
         ui->pbIoOut1->setStyleSheet(offLed);
@@ -853,9 +868,9 @@ void MainWindow::updateResult(std::array<lbShowData,4> rd)
         }else{
             lbForShow(&rd[1],startT2,1);
         }
-        recordChart2+=QString("%1,%2,%3 \n").arg(rd[1].innerTemp)
+        recordChart2.append(QString("%1,%2,%3 \n").arg(rd[1].innerTemp)
                 .arg(rd[1].outterTemp)
-                .arg(powerUsed);
+                .arg(powerUsed));
         plot2Flow(rd[1].innerTemp,rd[1].outterTemp,powerUsed);
     }else{
         ui->pbIoOut2->setStyleSheet(offLed);
@@ -872,9 +887,9 @@ void MainWindow::updateResult(std::array<lbShowData,4> rd)
         }else{
             lbForShow(&rd[2],startT3,2);
         }
-        recordChart3+=QString("%1,%2,%3 \n").arg(rd[2].innerTemp)
+        recordChart3.append(QString("%1,%2,%3 \n").arg(rd[2].innerTemp)
                 .arg(rd[2].outterTemp)
-                .arg(powerUsed);
+                .arg(powerUsed));
         plot3Flow(rd[2].innerTemp,rd[2].outterTemp,powerUsed);
     }else{
         ui->pbIoOut3->setStyleSheet(offLed);
@@ -891,9 +906,9 @@ void MainWindow::updateResult(std::array<lbShowData,4> rd)
         }else{
             lbForShow(&rd[0],startT4,0);
         }
-        recordChart4+=QString("%1,%2,%3 \n").arg(rd[3].innerTemp)
+        recordChart4.append(QString("%1,%2,%3 \n").arg(rd[3].innerTemp)
                 .arg(rd[3].outterTemp)
-                .arg(powerUsed);
+                .arg(powerUsed));
         plot4Flow(rd[3].innerTemp,rd[3].outterTemp,powerUsed);
     }else{
         ui->pbIoOut4->setStyleSheet(offLed);
@@ -909,7 +924,7 @@ void MainWindow::writeStringToText(QString *txtStream)
         bool makeDir=dir.mkdir(dataSaveAddress);
         qDebug()<<"create save file address..."<<makeDir<<"..."<<dataSaveAddress;
     }
-//    QString fname=dataSaveAddress+"/"+QString::number(productId)+".txt";
+    //    QString fname=dataSaveAddress+"/"+QString::number(productId)+".txt";
     QString fname=QString("%1/%2.txt").arg(dataSaveAddress).arg(productId);
     QFile   file(fname);
     if(!file.exists()){
@@ -923,6 +938,44 @@ void MainWindow::writeStringToText(QString *txtStream)
     stream<<*txtStream<<"\n";
     file.close();
     *txtStream="";
+}
+
+void MainWindow::initSql()
+{
+    database=QSqlDatabase::addDatabase("QSQLITE");
+    QString sqlad=QApplication::applicationDirPath()+"/doWork.db";
+    database.setDatabaseName(sqlad);
+    if(!database.open()){
+        qDebug()<<"Sql have Error ,please check ...\n"
+               <<sqlad;
+    }
+
+
+    dataSaveAddress=QApplication::applicationDirPath()+"/Data/"+QDate::currentDate().toString("yyyyMMdd");
+    QDir dir;
+    if(!dir.exists(dataSaveAddress)){
+        bool makeDir=dir.mkdir(dataSaveAddress);
+        qDebug()<<"create save file address..."<<makeDir<<"..."<<dataSaveAddress;
+    }
+}
+
+void MainWindow::insertResultSql(QString userproductId)
+{
+
+    QSqlQuery sqlQuery;
+    sqlQuery.prepare("INSERT INTO dayWork (productId,day,time,name,heatRatio,highT,innerC,outterC,heatL,dataFile) "
+                     "VALUES (:wproductId,:wday,:wtime,:wname,:wheatRatio,:whighT,:winnerC,:woutterC,:wheatL,:wdataFile)");
+    sqlQuery.bindValue(":wproductId",QString("No.%1Id%2#").arg(userproductId).arg(productId));
+    sqlQuery.bindValue(":wday",startWPTime.toString("yyyy-MM-dd"));
+    sqlQuery.bindValue(":wtime",startWPTime.toString("hh:mm:ss"));
+    sqlQuery.bindValue(":wname",m_setData->Name);
+    sqlQuery.bindValue(":wheatRatio",m_setData->RateofHeat);
+    sqlQuery.bindValue(":whighT",m_setData->HighTempe);
+    sqlQuery.bindValue(":winnerC",m_setData->InnerDiam);
+    sqlQuery.bindValue(":woutterC",m_setData->OutDiam);
+    sqlQuery.bindValue(":wheatL",m_setData->Length);
+    sqlQuery.bindValue(":wdataFile",dataSaveAddress+"/"+QString::number(productId)+".txt");
+    sqlQuery.exec();
 }
 
 

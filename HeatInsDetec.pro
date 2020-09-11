@@ -1,4 +1,4 @@
-QT       += core gui serialport serialbus
+QT       += core gui serialport serialbus sql xml charts script
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets printsupport
 include(./AIBUSProtocol/aibusProtocol.pri)
@@ -21,19 +21,28 @@ TRANSLATIONS += Jap.ts \
 
 SOURCES += \
     axistag.cpp \
+    findhistory.cpp \
     main.cpp \
     mainwindow.cpp \
     qcustomplot.cpp \
+    report/CommonClasses.cpp \
+    report/chart.cpp \
+    report/numbertoarabicword.cpp \
     setting.cpp
 
 HEADERS += \
     axistag.h \
     dataType.h \
+    findhistory.h \
     mainwindow.h \
     qcustomplot.h \
+    report/CommonClasses.h \
+    report/chart.h \
+    report/numbertoarabicword.h \
     setting.h
 
 FORMS += \
+    findhistory.ui \
     mainwindow.ui \
     setting.ui
 
