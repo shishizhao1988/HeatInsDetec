@@ -22,7 +22,8 @@ public:
     explicit Setting(QWidget *parent = nullptr);
     ~Setting();
 
-
+    int getYudianPort(){return m_yudianPort;}
+    int getModbusPort(){return m_modbusPort;}
     SysSetData* sysSettings() const;
 private:
 
@@ -35,6 +36,9 @@ private:
     void saveToSsd();
 private slots:
     void tableVClk(const QModelIndex &index);
+public  slots:
+
+    void updatePort(int yudian,int modbusRtu);
 private:
     Ui::Setting *ui;
     SysSetData *m_settings,tempSData;
@@ -44,6 +48,8 @@ private:
     QMenu *tbRightMc;
 
     int tbSelectRow;
+    int m_yudianPort;
+    int m_modbusPort;
     bool isUseThis;
 };
 

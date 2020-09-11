@@ -58,6 +58,7 @@ private:
 signals:
     void readDone();
     void serialIsDiscnt();
+    void changePort(int yudian,int modbus);
 
 private slots:
     void timerRW();
@@ -98,6 +99,10 @@ private slots:
     void  aiPortOpen();
     void  mdbPortOpen();
     void twoPortClose();
+    void on_leYuDianPort_editingFinished();
+
+    void on_lePowerPort_editingFinished();
+
 private:
     Ui::MainWindow *ui;
     Setting         *m_setting;

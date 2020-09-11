@@ -58,11 +58,6 @@ void Setting::initUI()
         iniRSettings->beginGroup(group);
         QStringList keyList=iniRSettings->childKeys();
         QList<QStandardItem *> itl;
-//        foreach (QString key, keyList) {
-//            qDebug()<<key<<" ";
-//            QStandardItem *it=new QStandardItem(iniRSettings->value(key).toString());
-//            itl.append(it);
-//        }
         for(const auto& i:keyList){
             QStandardItem *it=new QStandardItem(iniRSettings->value(i).toString());
             itl.append(it);
@@ -74,7 +69,8 @@ void Setting::initUI()
 
     ui->tvType->setModel(m_model);
     ui->tvType->setAlternatingRowColors(true);
-
+    m_yudianPort=iniRSettings->value("Port/yudian").toInt();
+    m_modbusPort=iniRSettings->value("Port/modbus").toInt();
     m_settings=new SysSetData();
     m_settings->Name=iniRSettings->value("Default/1Name").toString();
     m_settings->Length=iniRSettings->value("Default/4HeatL").toString();
@@ -188,4 +184,12 @@ void Setting::tableVClk(const QModelIndex &index)
     ui->sbHighTemp->setValue( m_model->item(index.row(),4)->text().toInt());
     ui->dsbHeatRate->setValue( m_model->item(index.row(),5)->text().toInt());
 
+}
+
+void Setting::updatePort(int yudian, int modbusRtu)
+{
+    iniRSettings->beginGroup("Port");
+    iniRSettings->setValue("yudian",yudian);
+    iniRSettings->setValue("modbus",modbusRtu);
+    iniRSettings->endGroup();
 }

@@ -64,6 +64,8 @@ MainWindow::~MainWindow()
 
 void MainWindow::initUI()
 {
+    ui->leYuDianPort->setText(QString::number(m_setting->getYudianPort()));
+    ui->lePowerPort->setText(QString::number(m_setting->getModbusPort()));
     test1lbShow=new lbShowData;
     test2lbShow=new lbShowData;
     test3lbShow=new lbShowData;
@@ -252,6 +254,8 @@ void MainWindow::initAction()
             this,&MainWindow::mdbPortOpen);
     connect(ui->actionDisconnect485,&QAction::triggered,
             this,&MainWindow::twoPortClose);
+    connect(this,&MainWindow::changePort,
+            m_setting,&Setting::updatePort);
     connect(ui->pbExit,&QPushButton::clicked,this,&MainWindow::exitExt);
     connect(ui->actionoptionSys,&QAction::triggered,m_setting,&QDialog::show);
     connect(dataTimer,SIGNAL(timeout()),this,SLOT(timerRW()));
@@ -998,3 +1002,13 @@ void MainWindow::twoPortClose()
     }
 }
 
+
+void MainWindow::on_leYuDianPort_editingFinished()
+{
+    emit changePort(ui->leYuDianPort->text().toInt(),ui->lePowerPort->text().toInt());
+}
+
+void MainWindow::on_lePowerPort_editingFinished()
+{
+    emit changePort(ui->leYuDianPort->text().toInt(),ui->lePowerPort->text().toInt());
+}

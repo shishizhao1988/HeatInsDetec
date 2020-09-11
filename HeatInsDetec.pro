@@ -48,7 +48,7 @@ RESOURCES += \
 DISTFILES +=
 
 win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../../../../GiteeGithub/QtRptProject/bin/release/lib/ -lQtRPT
-else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../../../../GiteeGithub/QtRptProject/bin/debug/lib/ -lQtRPTd
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../../../../GiteeGithub/QtRptProject/bin/debug/lib/ -lQtRPT
 else:unix: LIBS += -L$$PWD/../../../../GiteeGithub/QtRptProject/bin/debug/lib/ -lQtRPT
 
 INCLUDEPATH += $$PWD/../../../../GiteeGithub/QtRptProject/QtRPT
