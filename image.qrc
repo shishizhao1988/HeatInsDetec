@@ -1,7 +1,7 @@
 <RCC>
     <qresource prefix="/">
         <file>img/application-exit.png</file>
-        <file>img/connect.png</file>
+        <file>img/connectmb.png</file>
         <file>img/disconnect.png</file>
         <file>img/exe_icon.ico</file>
         <file>img/commit.png</file>
@@ -13,5 +13,6 @@
         <file>Jap.qm</file>
         <file>img/switch-off.png</file>
         <file>img/switch-on.png</file>
+        <file>img/connectYudian.png</file>
     </qresource>
 </RCC>

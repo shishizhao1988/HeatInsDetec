@@ -132,13 +132,6 @@
         </property>
        </widget>
       </item>
-      <item row="5" column="2">
-       <widget class="QCheckBox" name="cbableCalcul3">
-        <property name="text">
-         <string>开始计算3</string>
-        </property>
-       </widget>
-      </item>
       <item row="2" column="0">
        <widget class="QLabel" name="label_3">
         <property name="minimumSize">
@@ -224,13 +217,6 @@
         </item>
        </widget>
       </item>
-      <item row="1" column="2">
-       <widget class="QLabel" name="label_2">
-        <property name="text">
-         <string>功率通讯口</string>
-        </property>
-       </widget>
-      </item>
       <item row="6" column="1">
        <widget class="QPushButton" name="pbIoOut4">
         <property name="maximumSize">
@@ -277,19 +263,6 @@
         </property>
         <property name="text">
          <string>---</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="4">
-       <widget class="QLineEdit" name="lePowerPort">
-        <property name="maximumSize">
-         <size>
-          <width>60</width>
-          <height>16777215</height>
-         </size>
-        </property>
-        <property name="text">
-         <string>8</string>
         </property>
        </widget>
       </item>
@@ -500,13 +473,6 @@ color: rgb(255, 0, 0);</string>
         </property>
        </widget>
       </item>
-      <item row="4" column="2">
-       <widget class="QCheckBox" name="cbableCalcul2">
-        <property name="text">
-         <string>开始计算2</string>
-        </property>
-       </widget>
-      </item>
       <item row="3" column="4">
        <widget class="QComboBox" name="cbTempeSet1">
         <property name="editable">
@@ -539,13 +505,6 @@ color: rgb(255, 0, 0);</string>
         </item>
        </widget>
       </item>
-      <item row="3" column="2">
-       <widget class="QCheckBox" name="cbableCalcul1">
-        <property name="text">
-         <string>开始计算1</string>
-        </property>
-       </widget>
-      </item>
       <item row="4" column="0">
        <widget class="QLineEdit" name="leproducId2">
         <property name="maximumSize">
@@ -553,13 +512,6 @@ color: rgb(255, 0, 0);</string>
           <width>90</width>
           <height>16777215</height>
          </size>
-        </property>
-       </widget>
-      </item>
-      <item row="6" column="2">
-       <widget class="QCheckBox" name="cbableCalcul4">
-        <property name="text">
-         <string>开始计算4</string>
         </property>
        </widget>
       </item>
@@ -677,6 +629,26 @@ color: rgb(255, 0, 0);</string>
         </property>
        </widget>
       </item>
+      <item row="1" column="5">
+       <widget class="QLineEdit" name="lePowerPort">
+        <property name="maximumSize">
+         <size>
+          <width>60</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>8</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="4">
+       <widget class="QLabel" name="label_2">
+        <property name="text">
+         <string>功率通讯口</string>
+        </property>
+       </widget>
+      </item>
      </layout>
     </item>
     <item>
@@ -766,8 +738,9 @@ color: rgb(255, 0, 0);</string>
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
-   <addaction name="actionDisconnect485"/>
+   <addaction name="actionDisconnect"/>
    <addaction name="actionconnect485"/>
+   <addaction name="actionconnectYD"/>
    <addaction name="actionoptionSys"/>
    <addaction name="separator"/>
    <addaction name="actionChnLag"/>
@@ -777,7 +750,7 @@ color: rgb(255, 0, 0);</string>
   <action name="actionconnect485">
    <property name="icon">
     <iconset resource="image.qrc">
-     <normaloff>:/img/connect.png</normaloff>:/img/connect.png</iconset>
+     <normaloff>:/img/connectmb.png</normaloff>:/img/connectmb.png</iconset>
    </property>
    <property name="text">
     <string>connect485</string>
@@ -792,13 +765,16 @@ color: rgb(255, 0, 0);</string>
     <string>optionSys</string>
    </property>
   </action>
-  <action name="actionDisconnect485">
+  <action name="actionDisconnect">
    <property name="icon">
     <iconset resource="image.qrc">
      <normaloff>:/img/disconnect.png</normaloff>:/img/disconnect.png</iconset>
    </property>
    <property name="text">
-    <string>Disconnect485</string>
+    <string>Disconnect</string>
+   </property>
+   <property name="toolTip">
+    <string>Disconnect</string>
    </property>
   </action>
   <action name="actionChnLag">
@@ -826,6 +802,15 @@ color: rgb(255, 0, 0);</string>
    </property>
    <property name="text">
     <string>EngLag</string>
+   </property>
+  </action>
+  <action name="actionconnectYD">
+   <property name="icon">
+    <iconset resource="image.qrc">
+     <normaloff>:/img/connectYudian.png</normaloff>:/img/connectYudian.png</iconset>
+   </property>
+   <property name="text">
+    <string>connectYD</string>
    </property>
   </action>
  </widget>

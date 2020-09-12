@@ -20,9 +20,9 @@ enum heatFlowStep{
 struct SysSetData
 {
     QString Name;
-    QString Length;
-    QString InnerDiam;
-    QString OutDiam;
+    QString Lengthmm;
+    QString InnerDiammm;
+    QString OutDiammm;
     QString HighTempe;
     QString RateofHeat;
     QString calculateTime;

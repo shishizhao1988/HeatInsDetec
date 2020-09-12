@@ -43,6 +43,7 @@ private:
     Ui::Setting *ui;
     SysSetData *m_settings,tempSData;
     QSettings *iniRSettings;
+    QSettings *portSettings;
 
     QStandardItemModel *m_model;
     QMenu *tbRightMc;
