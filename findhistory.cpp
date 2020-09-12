@@ -13,8 +13,6 @@ findHistory::findHistory(QWidget *parent) :
     ui(new Ui::findHistory)
 {
     ui->setupUi(this);
-
-//    m_cuse=new commenUse();
     m_rdata=new ReportData();
     grfAddress=QApplication::applicationDirPath();
     ui->tableView->setAlternatingRowColors(true);
@@ -22,11 +20,11 @@ findHistory::findHistory(QWidget *parent) :
     ui->tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     ui->tableView->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
-//    ui->deEnd->setDate(QDate::currentDate());
-//    ui->deEnd->setCalendarPopup(true);
+    ui->cwStart->setSelectedDate(QDate::currentDate().addDays(-10));
+    ui->cwEnd->setSelectedDate(QDate::currentDate());
+    connect(ui->cwStart,&QCalendarWidget::selectionChanged,this,&findHistory::calClickIsQualified);
+    connect(ui->cwEnd,&QCalendarWidget::selectionChanged,this,&findHistory::calClickIsQualified);
 
-//    ui->deStart->setDate(QDate::currentDate().addDays(-1));
-//    ui->deStart->setCalendarPopup(true);
 }
 
 
@@ -45,12 +43,12 @@ void findHistory::on_pbFindShowAll_clicked()
 void findHistory::on_pbFindByDay_clicked()
 {
     QString sqlFindStr=QString("SELECT * FROM dayWork WHERE day BETWEEN '%1-%2-%3' AND '%4-%5-%6' ")
-            .arg(ui->sbStartYear->value())
-            .arg(ui->sbStartMonth->value(),2,10,QLatin1Char('0'))
-            .arg(ui->sbStartDay->value(),2,10,QLatin1Char('0'))
-            .arg(ui->sbEndYear->value())
-            .arg(ui->sbEndMonth->value(),2,10,QLatin1Char('0'))
-            .arg(ui->sbEndDay->value(),2,10,QLatin1Char('0'));
+            .arg(ui->cwStart->selectedDate().year())
+            .arg(ui->cwStart->selectedDate().month(),2,10,QLatin1Char('0'))
+            .arg(ui->cwStart->selectedDate().day(),2,10,QLatin1Char('0'))
+            .arg(ui->cwEnd->selectedDate().year())
+            .arg(ui->cwEnd->selectedDate().month(),2,10,QLatin1Char('0'))
+            .arg(ui->cwEnd->selectedDate().day(),2,10,QLatin1Char('0'));
     model=new QSqlQueryModel;
     model->setQuery(sqlFindStr,database);
     updateTableView();
@@ -274,4 +272,22 @@ void findHistory::setChart(RptFieldObject &fieldObject, QChart &chart)
     QFont font=chart.titleFont();
     font.setPointSize(font.pointSize()*2);
     chart.setTitleFont(font);
+}
+
+void findHistory::calClickIsQualified()
+{
+    if(ui->cwStart->selectedDate()>QDate::currentDate()){
+        QMessageBox::warning(this,tr("no work"),tr("this day is future"));
+        ui->cwStart->setSelectedDate(QDate::currentDate());
+    }
+
+    if(ui->cwEnd->selectedDate()>QDate::currentDate()){
+        QMessageBox::warning(this,tr("no work"),tr("this day is future"));
+        ui->cwEnd->setSelectedDate(QDate::currentDate());
+    }
+
+    if(ui->cwStart>ui->cwEnd) {
+        QMessageBox::warning(this,tr("Error"),tr("daily record of work must START day to END day"));
+        ui->cwEnd->setSelectedDate(ui->cwStart->selectedDate().addDays(7));
+    }
 }

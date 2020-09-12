@@ -66,7 +66,7 @@ private slots:
     void setAllDSInfo(DataSetInfo &dsInfo);
 
     void setChart(RptFieldObject &fieldObject,QChart &chart);
-
+    void calClickIsQualified();
 private:
     Ui::findHistory *ui;
     QSqlQueryModel *model;
