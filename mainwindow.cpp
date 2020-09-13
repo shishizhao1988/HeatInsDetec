@@ -855,8 +855,9 @@ void MainWindow::updateResult(std::array<lbShowData,4> rd)
             isReachSetTemp1=true;
             startT1->restart();
         }
-        if(isReachSetTemp1&&startT1->elapsed()==60*1000){
+        if(isReachSetTemp1&&startT1->elapsed()==5*60*1000){
             averageKWstrat1=rd[0].totalPower;
+            startT1->restart();
         }
         powerUsed=isReachSetTemp1?(rd[0].totalPower-averageKWstrat1)*1000:0;
         calculResult1=calculateLamda(powerUsed,rd[0].outterTemp,rd[0].innerTemp);

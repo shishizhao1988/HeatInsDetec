@@ -181,8 +181,8 @@ void Setting::tableVClk(const QModelIndex &index)
 {
     tbSelectRow=index.row();
     ui->leName->setText(m_model->item(index.row())->text());
-    ui->sbOutDiam->setValue( m_model->item(index.row(),1)->text().toInt());
-    ui->sbInnerDiam->setValue( m_model->item(index.row(),2)->text().toInt());
+    ui->sbOutDiam->setValue( m_model->item(index.row(),1)->text().toDouble());
+    ui->sbInnerDiam->setValue( m_model->item(index.row(),2)->text().toDouble());
     ui->sbHeatLength->setValue( m_model->item(index.row(),3)->text().toInt());
     ui->sbHighTemp->setValue( m_model->item(index.row(),4)->text().toInt());
     ui->dsbHeatRate->setValue( m_model->item(index.row(),5)->text().toInt());
