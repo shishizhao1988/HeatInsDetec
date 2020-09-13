@@ -65,6 +65,8 @@ MainWindow::~MainWindow()
 
 void MainWindow::initUI()
 {
+    on_actionChnLag_triggered();
+
     ui->leYuDianPort->setText(QString::number(m_setting->getYudianPort()));
     ui->lePowerPort->setText(QString::number(m_setting->getModbusPort()));
     test1lbShow=new lbShowData;
