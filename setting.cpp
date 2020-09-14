@@ -15,9 +15,9 @@ Setting::Setting(QWidget *parent) :
         if(isUseThis) m_settings=&tempSData;
         iniRSettings->beginGroup("Default");
         iniRSettings->setValue("1Name",tempSData.Name);
-        iniRSettings->setValue("2OutD",tempSData.OutDiam);
-        iniRSettings->setValue("3InnerD",tempSData.InnerDiam);
-        iniRSettings->setValue("4HeatL",tempSData.Length);
+        iniRSettings->setValue("2OutD",tempSData.OutDiammm);
+        iniRSettings->setValue("3InnerD",tempSData.InnerDiammm);
+        iniRSettings->setValue("4HeatL",tempSData.Lengthmm);
         iniRSettings->setValue("5HeatTemp",tempSData.HighTempe);
         iniRSettings->setValue("6Rate",tempSData.RateofHeat);
         iniRSettings->endGroup();
@@ -40,6 +40,10 @@ SysSetData *Setting::sysSettings() const
 
 void Setting::initUI()
 {
+    portSettings=new QSettings(QApplication::applicationDirPath()+"/configPort.ini",QSettings::IniFormat);
+    m_yudianPort=portSettings->value("Port/yudian").toInt();
+    m_modbusPort=portSettings->value("Port/modbus").toInt();
+
     iniRSettings=new QSettings(QApplication::applicationDirPath()+"/config.ini",QSettings::IniFormat);
     iniRSettings->setIniCodec("UTF8");
     QStringList groupList=iniRSettings->childGroups();
@@ -47,7 +51,7 @@ void Setting::initUI()
     m_model=new QStandardItemModel();
     m_model->setColumnCount(6);
     m_model->setHeaderData(0,Qt::Horizontal,"Name");
-    m_model->setHeaderData(1,Qt::Horizontal,"Out D");
+    m_model->setHeaderData(1,Qt::Horizontal,"Out Diameter");
     m_model->setHeaderData(2,Qt::Horizontal,"Inner Diameter");
     m_model->setHeaderData(3,Qt::Horizontal,"Heat Length");
     m_model->setHeaderData(4,Qt::Horizontal,"Heat Level");
@@ -69,14 +73,13 @@ void Setting::initUI()
 
     ui->tvType->setModel(m_model);
     ui->tvType->setAlternatingRowColors(true);
-    m_yudianPort=iniRSettings->value("Port/yudian").toInt();
-    m_modbusPort=iniRSettings->value("Port/modbus").toInt();
+
     m_settings=new SysSetData();
     m_settings->Name=iniRSettings->value("Default/1Name").toString();
-    m_settings->Length=iniRSettings->value("Default/4HeatL").toString();
-    m_settings->OutDiam=iniRSettings->value("Default/2OutD").toString();
+    m_settings->Lengthmm=iniRSettings->value("Default/4HeatL").toString();
+    m_settings->OutDiammm=iniRSettings->value("Default/2OutD").toString();
     m_settings->HighTempe=iniRSettings->value("Default/5HeatTemp").toString();
-    m_settings->InnerDiam=iniRSettings->value("Default/3InnerD").toString();
+    m_settings->InnerDiammm=iniRSettings->value("Default/3InnerD").toString();
     m_settings->RateofHeat=iniRSettings->value("Default/6Rate").toString();
 
 }
@@ -115,9 +118,9 @@ void Setting::addItem()
     int insertRow=m_model->rowCount(QModelIndex());
     m_model->insertRow(insertRow);
     m_model->setItem(insertRow,0,new QStandardItem(tempSData.Name));
-    m_model->setItem(insertRow,1,new QStandardItem(tempSData.Length));
-    m_model->setItem(insertRow,2,new QStandardItem(tempSData.InnerDiam));
-    m_model->setItem(insertRow,3,new QStandardItem(tempSData.OutDiam));
+    m_model->setItem(insertRow,1,new QStandardItem(tempSData.OutDiammm));
+    m_model->setItem(insertRow,2,new QStandardItem(tempSData.InnerDiammm));
+    m_model->setItem(insertRow,3,new QStandardItem(tempSData.Lengthmm));
     m_model->setItem(insertRow,4,new QStandardItem(tempSData.HighTempe));
     m_model->setItem(insertRow,5,new QStandardItem(tempSData.RateofHeat));
 
@@ -138,9 +141,9 @@ void Setting::changeItem()
     saveToSsd();
 
     m_model->item(tbSelectRow,0)->setData(tempSData.Name,Qt::DisplayRole);
-    m_model->item(tbSelectRow,1)->setData(tempSData.Length,Qt::DisplayRole);
-    m_model->item(tbSelectRow,2)->setData(tempSData.InnerDiam,Qt::DisplayRole);
-    m_model->item(tbSelectRow,3)->setData(tempSData.OutDiam,Qt::DisplayRole);
+    m_model->item(tbSelectRow,1)->setData(tempSData.OutDiammm,Qt::DisplayRole);
+    m_model->item(tbSelectRow,2)->setData(tempSData.InnerDiammm,Qt::DisplayRole);
+    m_model->item(tbSelectRow,3)->setData(tempSData.Lengthmm,Qt::DisplayRole);
     m_model->item(tbSelectRow,4)->setData(tempSData.HighTempe,Qt::DisplayRole);
     m_model->item(tbSelectRow,5)->setData(tempSData.RateofHeat,Qt::DisplayRole);
 }
@@ -158,17 +161,17 @@ void Setting::saveToSsd()
         return;
     }
     tempSData.Name=ui->leName->text();
-    tempSData.Length=ui->sbHeatLength->text();
-    tempSData.OutDiam=ui->sbOutDiam->text();
-    tempSData.InnerDiam=ui->sbInnerDiam->text();
+    tempSData.Lengthmm=ui->sbHeatLength->text();
+    tempSData.OutDiammm=ui->sbOutDiam->text();
+    tempSData.InnerDiammm=ui->sbInnerDiam->text();
     tempSData.RateofHeat=ui->dsbHeatRate->text();
     tempSData.HighTempe=ui->sbHighTemp->text();
 
     iniRSettings->beginGroup(tempSData.Name);
     iniRSettings->setValue("1Name",tempSData.Name);
-    iniRSettings->setValue("2OutD",tempSData.OutDiam);
-    iniRSettings->setValue("3InnerD",tempSData.InnerDiam);
-    iniRSettings->setValue("4HeatL",tempSData.Length);
+    iniRSettings->setValue("2OutD",tempSData.OutDiammm);
+    iniRSettings->setValue("3InnerD",tempSData.InnerDiammm);
+    iniRSettings->setValue("4HeatL",tempSData.Lengthmm);
     iniRSettings->setValue("5HeatTemp",tempSData.HighTempe);
     iniRSettings->setValue("6Rate",tempSData.RateofHeat);
     iniRSettings->endGroup();
@@ -178,8 +181,8 @@ void Setting::tableVClk(const QModelIndex &index)
 {
     tbSelectRow=index.row();
     ui->leName->setText(m_model->item(index.row())->text());
-    ui->sbOutDiam->setValue( m_model->item(index.row(),1)->text().toInt());
-    ui->sbInnerDiam->setValue( m_model->item(index.row(),2)->text().toInt());
+    ui->sbOutDiam->setValue( m_model->item(index.row(),1)->text().toDouble());
+    ui->sbInnerDiam->setValue( m_model->item(index.row(),2)->text().toDouble());
     ui->sbHeatLength->setValue( m_model->item(index.row(),3)->text().toInt());
     ui->sbHighTemp->setValue( m_model->item(index.row(),4)->text().toInt());
     ui->dsbHeatRate->setValue( m_model->item(index.row(),5)->text().toInt());
@@ -188,8 +191,8 @@ void Setting::tableVClk(const QModelIndex &index)
 
 void Setting::updatePort(int yudian, int modbusRtu)
 {
-    iniRSettings->beginGroup("Port");
-    iniRSettings->setValue("yudian",yudian);
-    iniRSettings->setValue("modbus",modbusRtu);
-    iniRSettings->endGroup();
+    portSettings->beginGroup("Port");
+    portSettings->setValue("yudian",yudian);
+    portSettings->setValue("modbus",modbusRtu);
+    portSettings->endGroup();
 }

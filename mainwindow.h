@@ -111,7 +111,7 @@ private slots:
     void on_leYuDianPort_editingFinished();
 
     void on_lePowerPort_editingFinished();
-
+    void calSettingFactory();
 private:
     Ui::MainWindow *ui;
     Setting         *m_setting;
@@ -160,12 +160,11 @@ private:
 
     QTimer* dataTimer;
     QTime *startT1,*startT2,*startT3,*startT4;
-    QTime *averageTstrat1,*averageTstrat2,*averageTstrat3,*averageTstrat4;
     float averageKWstrat1,averageKWstrat2,averageKWstrat3,averageKWstrat4;
-    float averageKW1,averageKW2,averageKW3,averageKW4;
 
     bool readOrWrite;
     bool isOpen1,isOpen2,isOpen3,isOpen4;
+    bool isReachSetTemp1,isReachSetTemp2,isReachSetTemp3,isReachSetTemp4;
     bool yudianPort,powerPort;
     double heatRate;
     int  wtAddress,wtValue;

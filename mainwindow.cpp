@@ -32,11 +32,8 @@ MainWindow::MainWindow(QWidget *parent)
     m_findh=new findHistory(this);
 
     m_setData=m_setting->sysSettings();
+    calSettingFactory();
     modbusDevice=new QModbusRtuSerialMaster(this);
-
-    calcuFactor=std::log(m_setData->OutDiam.toDouble()/m_setData->InnerDiam.toDouble())
-            /(2*m_setData->Length.toDouble()*M_PI);
-    heatRate=m_setData->RateofHeat.toDouble();
     dataTimer->setInterval(1000);
     yudianPort=false;
     powerPort=false;
@@ -68,13 +65,14 @@ MainWindow::~MainWindow()
 
 void MainWindow::initUI()
 {
+    on_actionChnLag_triggered();
+
     ui->leYuDianPort->setText(QString::number(m_setting->getYudianPort()));
     ui->lePowerPort->setText(QString::number(m_setting->getModbusPort()));
     test1lbShow=new lbShowData;
     test2lbShow=new lbShowData;
     test3lbShow=new lbShowData;
     test4lbShow=new lbShowData;
-    ui->actionDisconnect485->setEnabled(false);
     startT1=new QTime;
     startT2=new QTime;
     startT3=new QTime;
@@ -252,11 +250,11 @@ void MainWindow::initPlot()
 
 void MainWindow::initAction()
 {
-    connect(ui->actionconnect485,&QAction::triggered,
+    connect(ui->actionconnectYD,&QAction::triggered,
             this,&MainWindow::aiPortOpen);
     connect(ui->actionconnect485,&QAction::triggered,
             this,&MainWindow::mdbPortOpen);
-    connect(ui->actionDisconnect485,&QAction::triggered,
+    connect(ui->actionDisconnect,&QAction::triggered,
             this,&MainWindow::twoPortClose);
     connect(this,&MainWindow::changePort,
             m_setting,&Setting::updatePort);
@@ -265,7 +263,7 @@ void MainWindow::initAction()
     connect(ui->pbExit,&QPushButton::clicked,this,&MainWindow::exitExt);
     connect(ui->actionoptionSys,&QAction::triggered,m_setting,&QDialog::show);
     connect(dataTimer,SIGNAL(timeout()),this,SLOT(timerRW()));
-
+    connect(m_setting,&QDialog::close,this,&MainWindow::calSettingFactory);
 }
 
 
@@ -466,7 +464,7 @@ QString MainWindow::whatsLeveInResult(double result)
     }else if(result>=0.002&&result<0.006){
         whatsLevel="E";
     }else if(result>0&&result<0.002){
-        whatsLevel="ERROR";
+        whatsLevel="OK";
     }
     return whatsLevel;
 }
@@ -532,7 +530,7 @@ void MainWindow::aiPortOpen()
         dataTimer->start();
         yudianPort=true;
     }
-
+    ui->actionconnectYD->setEnabled(!yudianPort);
 }
 
 void MainWindow::mdbPortOpen()
@@ -564,6 +562,7 @@ void MainWindow::mdbPortOpen()
         modbusDevice->disconnectDevice();
         powerPort=false;
     }
+    ui->actionconnect485->setEnabled(!powerPort);
 }
 
 
@@ -722,15 +721,17 @@ void MainWindow::on_pbIoOut1_clicked()
             startT1=new QTime;
             startT1->start();
             startWPTime=QDateTime::currentDateTime();
-            ui->cbableCalcul1->setCheckState(Qt::Unchecked);
-            averageKWstrat1=recData485[0].totalPower;
             if(yudianPort) wtMdb(10,m_setData->HighTempe.toDouble()*10);
             isOpen1=true;
+            isReachSetTemp1=false;
+            ui->pbIoOut1->setStyleSheet(onLed);
         }else{
             if(yudianPort) wtMdb(10,0);
             writeStringToText(&recordChart1);
             insertResultSql(ui->leproducId1->text());
             isOpen1=false;
+            ui->pbIoOut1->setStyleSheet(offLed);
+            recordChart1.clear();
         }
     }
 }
@@ -754,16 +755,18 @@ void MainWindow::on_pbIoOut2_clicked()
             productId++;
             startT2=new QTime;
             startT2->start();
-            ui->cbableCalcul2->setCheckState(Qt::Unchecked);
-            averageKWstrat2=recData485[1].totalPower;
             if(yudianPort) wtMdb(11,m_setData->HighTempe.toDouble()*10);
             isOpen2=true;
+            isReachSetTemp2=false;
+            ui->pbIoOut2->setStyleSheet(onLed);
+
         }else{
             if(yudianPort) wtMdb(11,0);
-            writeStringToText(&recordChart1);
+            writeStringToText(&recordChart2);
             isOpen2=false;
             insertResultSql(ui->leproducId2->text());
-
+            ui->pbIoOut2->setStyleSheet(offLed);
+            recordChart2.clear();
         }
     }
 }
@@ -787,16 +790,18 @@ void MainWindow::on_pbIoOut3_clicked()
             productId++;
             startT3=new QTime;
             startT3->start();
-            ui->cbableCalcul3->setCheckState(Qt::Unchecked);
-            averageKWstrat3=recData485[2].totalPower;
             if(yudianPort) wtMdb(12,m_setData->HighTempe.toDouble()*10);
             isOpen3=true;
+            isReachSetTemp3=false;
+            ui->pbIoOut3->setStyleSheet(onLed);
+
         }else{
             if(yudianPort) wtMdb(12,0);
-            writeStringToText(&recordChart1);
+            writeStringToText(&recordChart3);
             isOpen3=false;
             insertResultSql(ui->leproducId3->text());
-
+            ui->pbIoOut3->setStyleSheet(offLed);
+            recordChart3.clear();
         }
     }
 }
@@ -820,16 +825,18 @@ void MainWindow::on_pbIoOut4_clicked()
             productId++;
             startT4=new QTime;
             startT4->start();
-            ui->cbableCalcul4->setCheckState(Qt::Unchecked);
-            averageKWstrat4=recData485[3].totalPower;
             if(yudianPort) wtMdb(13,m_setData->HighTempe.toDouble()*10);
             isOpen4=true;
+            isReachSetTemp4=false;
+            ui->pbIoOut4->setStyleSheet(onLed);
+
         }else{
             if(yudianPort) wtMdb(13,0);
-            writeStringToText(&recordChart1);
+            writeStringToText(&recordChart4);
             isOpen4=false;
             insertResultSql(ui->leproducId4->text());
-
+            ui->pbIoOut4->setStyleSheet(offLed);
+            recordChart4.clear();
         }
     }
 }
@@ -840,80 +847,85 @@ void MainWindow::updateResult(std::array<lbShowData,4> rd)
     float powerUsed=0.0;
     //11111111111111111111111111111111
     if(isOpen1){
-        ui->pbIoOut1->setStyleSheet(onLed);
-        powerUsed=rd[0].totalPower-averageKWstrat1;
-        if(ui->cbableCalcul1->isChecked()){
-            averageKW1=(powerUsed*1000)/(averageTstrat1->elapsed()/1000);
-            calculResult1=calculateLamda(averageKW1,rd[0].outterTemp,rd[0].innerTemp);
-            lbForShow(&rd[0],startT1,0,calculResult1);
-        }else{
-            lbForShow(&rd[0],startT1,0);
+        int timeGobyS1=startT1->elapsed()/1000;
+        if(!isReachSetTemp1&&rd[0].innerTemp>rd[0].innerSetTemp){
+            averageKWstrat1=rd[0].totalPower;
+            isReachSetTemp1=true;
+            startT1->restart();
         }
+        if(isReachSetTemp1&&timeGobyS1>5*60){
+            averageKWstrat1=rd[0].totalPower;
+            startT1->restart();
+        }
+        powerUsed=isReachSetTemp1?(rd[0].totalPower-averageKWstrat1)*1000/timeGobyS1:0;
+        calculResult1=calculateLamda(powerUsed,rd[0].outterTemp,rd[0].innerTemp);
+        lbForShow(&rd[0],startT1,0,calculResult1);
+
         recordChart1.append(QString("%1,%2,%3 \n").arg(rd[0].innerTemp)
                 .arg(rd[0].outterTemp)
                 .arg(powerUsed));
         plot1Flow(rd[0].innerTemp,rd[0].outterTemp,powerUsed);
-    }else{
-        ui->pbIoOut1->setStyleSheet(offLed);
     }
     //2222222222222222222
     if(isOpen2){
-        ui->pbIoOut2->setStyleSheet(onLed);
-        powerUsed=rd[1].totalPower-averageKWstrat2;
-
-        if(ui->cbableCalcul2->isChecked()){
-            averageKW2=(powerUsed*1000)/(averageTstrat2->elapsed()/1000);
-            calculResult2=calculateLamda(averageKW2,rd[1].outterTemp,rd[1].innerTemp);
-            lbForShow(&rd[1],startT2,1,calculResult2);
-        }else{
-            lbForShow(&rd[1],startT2,1);
+        int timeGobyS2=startT2->elapsed()/1000;
+        if(!isReachSetTemp2&&rd[1].innerTemp>rd[1].innerSetTemp){
+            averageKWstrat2=rd[1].totalPower;
+            isReachSetTemp2=true;
         }
+        if(isReachSetTemp2&&timeGobyS2>5*60){
+            averageKWstrat2=rd[1].totalPower;
+            startT2->restart();
+        }
+        powerUsed=isReachSetTemp2?(rd[1].totalPower-averageKWstrat2)*1000/timeGobyS2:0;
+        calculResult2=calculateLamda(powerUsed,rd[1].outterTemp,rd[1].innerTemp);
+        lbForShow(&rd[1],startT2,1,calculResult2);
+
         recordChart2.append(QString("%1,%2,%3 \n").arg(rd[1].innerTemp)
                 .arg(rd[1].outterTemp)
                 .arg(powerUsed));
         plot2Flow(rd[1].innerTemp,rd[1].outterTemp,powerUsed);
-    }else{
-        ui->pbIoOut2->setStyleSheet(offLed);
     }
     //3333333333333333333333333333
     if(isOpen3){
-        ui->pbIoOut3->setStyleSheet(onLed);
-        powerUsed=rd[2].totalPower-averageKWstrat3;
-
-        if(ui->cbableCalcul3->isChecked()){
-            averageKW3=(powerUsed*1000)/(averageTstrat3->elapsed()/1000);
-            calculResult3=calculateLamda(averageKW3,rd[2].outterTemp,rd[2].innerTemp);
-            lbForShow(&rd[2],startT3,2,calculResult3);
-        }else{
-            lbForShow(&rd[2],startT3,2);
+        int timeGobyS3=startT3->elapsed()/1000;
+        if(!isReachSetTemp3&&rd[2].innerTemp>rd[2].innerSetTemp){
+            averageKWstrat3=rd[2].totalPower;
+            isReachSetTemp3=true;
         }
+        if(isReachSetTemp3&&timeGobyS3>5*60){
+            averageKWstrat3=rd[0].totalPower;
+            startT3->restart();
+        }
+        powerUsed=isReachSetTemp3?(rd[2].totalPower-averageKWstrat3)*1000/timeGobyS3:0;
+        calculResult3=calculateLamda(powerUsed,rd[2].outterTemp,rd[2].innerTemp);
+        lbForShow(&rd[2],startT3,2,calculResult3);
+
         recordChart3.append(QString("%1,%2,%3 \n").arg(rd[2].innerTemp)
                 .arg(rd[2].outterTemp)
                 .arg(powerUsed));
         plot3Flow(rd[2].innerTemp,rd[2].outterTemp,powerUsed);
-    }else{
-        ui->pbIoOut3->setStyleSheet(offLed);
     }
     //444444444444444444444444
     if(isOpen4){
-        ui->pbIoOut4->setStyleSheet(onLed);
-        powerUsed=rd[3].totalPower-averageKWstrat4;
-
-        if(ui->cbableCalcul4->isChecked()){
-            averageKW4=(powerUsed*1000)/(averageTstrat4->elapsed()/1000);
-            calculResult4=calculateLamda(averageKW4,rd[3].outterTemp,rd[3].innerTemp);
-            lbForShow(&rd[3],startT4,0,calculResult4);
-        }else{
-            lbForShow(&rd[0],startT4,0);
+        int timeGobyS4=startT4->elapsed()/1000;
+        if(!isReachSetTemp4&&rd[3].innerTemp>rd[3].innerSetTemp){
+            averageKWstrat4=rd[3].totalPower;
+            isReachSetTemp4=true;
         }
+        if(isReachSetTemp4&&timeGobyS4>5*60){
+            averageKWstrat4=rd[3].totalPower;
+            startT4->restart();
+        }
+        powerUsed=isReachSetTemp4?(rd[3].totalPower-averageKWstrat4)*1000/timeGobyS4:0;
+        calculResult4=calculateLamda(powerUsed,rd[3].outterTemp,rd[3].innerTemp);
+        lbForShow(&rd[3],startT4,0,calculResult4);
+
         recordChart4.append(QString("%1,%2,%3 \n").arg(rd[3].innerTemp)
                 .arg(rd[3].outterTemp)
                 .arg(powerUsed));
         plot4Flow(rd[3].innerTemp,rd[3].outterTemp,powerUsed);
-    }else{
-        ui->pbIoOut4->setStyleSheet(offLed);
     }
-
 }
 
 void MainWindow::writeStringToText(QString *txtStream)
@@ -971,9 +983,9 @@ void MainWindow::insertResultSql(QString userproductId)
     sqlQuery.bindValue(":wname",m_setData->Name);
     sqlQuery.bindValue(":wheatRatio",m_setData->RateofHeat);
     sqlQuery.bindValue(":whighT",m_setData->HighTempe);
-    sqlQuery.bindValue(":winnerC",m_setData->InnerDiam);
-    sqlQuery.bindValue(":woutterC",m_setData->OutDiam);
-    sqlQuery.bindValue(":wheatL",m_setData->Length);
+    sqlQuery.bindValue(":winnerC",m_setData->InnerDiammm);
+    sqlQuery.bindValue(":woutterC",m_setData->OutDiammm);
+    sqlQuery.bindValue(":wheatL",m_setData->Lengthmm);
     sqlQuery.bindValue(":wdataFile",dataSaveAddress+"/"+QString::number(productId)+".txt");
     sqlQuery.exec();
 }
@@ -982,24 +994,18 @@ void MainWindow::insertResultSql(QString userproductId)
 void MainWindow::on_cbableCalcul1_stateChanged(int arg1)
 {
     if(arg1==Qt::Checked){
-        averageTstrat1=new QTime;
-        averageTstrat1->start();
+
         averageKWstrat1=recData485[0].totalPower;
         qDebug()<<averageKWstrat1;
     }
 }
 
-void MainWindow::on_cbTempeSet1_currentIndexChanged(int index)
-{
-    //    qDebug()<<"combobox out is :"<<ui->cbTempeSet1->itemData(index,Qt::DisplayRole).toInt()*10;
-    wtMdb(10,ui->cbTempeSet1->itemData(index,Qt::DisplayRole).toInt()*10);
-}
+
 
 void MainWindow::on_cbableCalcul2_stateChanged(int arg1)
 {
     if(arg1==Qt::Checked){
-        averageTstrat2=new QTime;
-        averageTstrat2->start();
+
         averageKWstrat2=recData485[1].totalPower;
         qDebug()<<averageKWstrat2;
     }
@@ -1008,8 +1014,7 @@ void MainWindow::on_cbableCalcul2_stateChanged(int arg1)
 void MainWindow::on_cbableCalcul3_stateChanged(int arg1)
 {
     if(arg1==Qt::Checked){
-        averageTstrat3=new QTime;
-        averageTstrat3->start();
+
         averageKWstrat3=recData485[2].totalPower;
         qDebug()<<averageKWstrat3;
     }
@@ -1018,29 +1023,46 @@ void MainWindow::on_cbableCalcul3_stateChanged(int arg1)
 void MainWindow::on_cbableCalcul4_stateChanged(int arg1)
 {
     if(arg1==Qt::Checked){
-        averageTstrat4=new QTime;
-        averageTstrat4->start();
+
         averageKWstrat4=recData485[3].totalPower;
         qDebug()<<averageKWstrat4;
     }
 }
 
+void MainWindow::on_cbTempeSet1_currentIndexChanged(int index)
+{
+    wtMdb(10,ui->cbTempeSet1->itemData(index,Qt::DisplayRole).toInt()*10);
+    if(isReachSetTemp1){
+        isReachSetTemp1=false;
+    }
+    startT1->restart();
+}
+
 void MainWindow::on_cbTempeSet2_currentIndexChanged(int index)
 {
-    //    qDebug()<<"combobox out is :"<<ui->cbTempeSet1->itemData(index,Qt::DisplayRole).toInt()*10;
     wtMdb(11,ui->cbTempeSet2->itemData(index,Qt::DisplayRole).toInt()*10);
+    if(isReachSetTemp2){
+        isReachSetTemp2=false;
+    }
+    startT2->restart();
 }
 
 void MainWindow::on_cbTempeSet3_currentIndexChanged(int index)
 {
-    //    qDebug()<<"combobox out is :"<<ui->cbTempeSet1->itemData(index,Qt::DisplayRole).toInt()*10;
     wtMdb(12,ui->cbTempeSet3->itemData(index,Qt::DisplayRole).toInt()*10);
+    if(isReachSetTemp3){
+        isReachSetTemp3=false;
+    }
+    startT3->restart();
 }
 
 void MainWindow::on_cbTempeSet4_currentIndexChanged(int index)
 {
-    //    qDebug()<<"combobox out is :"<<ui->cbTempeSet1->itemData(index,Qt::DisplayRole).toInt()*10;
     wtMdb(13,ui->cbTempeSet4->itemData(index,Qt::DisplayRole).toInt()*10);
+    if(isReachSetTemp4){
+        isReachSetTemp4=false;
+    }
+    startT4->restart();
 }
 
 void MainWindow::twoPortClose()
@@ -1053,6 +1075,9 @@ void MainWindow::twoPortClose()
         modbusDevice->disconnectDevice();
         powerPort=false;
     }
+    ui->actionDisconnect->setEnabled(false);
+    ui->actionconnectYD->setEnabled(true);
+    ui->actionconnect485->setEnabled(true);
 }
 
 
@@ -1064,4 +1089,11 @@ void MainWindow::on_leYuDianPort_editingFinished()
 void MainWindow::on_lePowerPort_editingFinished()
 {
     emit changePort(ui->leYuDianPort->text().toInt(),ui->lePowerPort->text().toInt());
+}
+
+void MainWindow::calSettingFactory()
+{
+    calcuFactor=std::log(m_setData->OutDiammm.toDouble()/m_setData->InnerDiammm.toDouble())
+            /(2*m_setData->Lengthmm.toDouble()*M_PI/1000);
+    heatRate=m_setData->RateofHeat.toDouble();
 }
