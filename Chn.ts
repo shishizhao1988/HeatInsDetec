@@ -290,17 +290,17 @@
     </message>
     <message>
         <location filename="mainwindow.cpp" line="714"/>
-        <location filename="mainwindow.cpp" line="750"/>
-        <location filename="mainwindow.cpp" line="786"/>
-        <location filename="mainwindow.cpp" line="822"/>
+        <location filename="mainwindow.cpp" line="749"/>
+        <location filename="mainwindow.cpp" line="785"/>
+        <location filename="mainwindow.cpp" line="821"/>
         <source>STOP HEAT</source>
         <translation>停止加热</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="715"/>
-        <location filename="mainwindow.cpp" line="751"/>
-        <location filename="mainwindow.cpp" line="787"/>
-        <location filename="mainwindow.cpp" line="823"/>
+        <location filename="mainwindow.cpp" line="750"/>
+        <location filename="mainwindow.cpp" line="786"/>
+        <location filename="mainwindow.cpp" line="822"/>
         <source>YES:: go temperature 0 .
  NO: DONOT HEATING</source>
         <translation>是: 调整设定温度为0,
@@ -308,17 +308,17 @@
     </message>
     <message>
         <location filename="mainwindow.cpp" line="711"/>
-        <location filename="mainwindow.cpp" line="747"/>
-        <location filename="mainwindow.cpp" line="783"/>
-        <location filename="mainwindow.cpp" line="819"/>
+        <location filename="mainwindow.cpp" line="746"/>
+        <location filename="mainwindow.cpp" line="782"/>
+        <location filename="mainwindow.cpp" line="818"/>
         <source>Do you start NOW</source>
         <translation>是否现在启动</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="712"/>
-        <location filename="mainwindow.cpp" line="748"/>
-        <location filename="mainwindow.cpp" line="784"/>
-        <location filename="mainwindow.cpp" line="820"/>
+        <location filename="mainwindow.cpp" line="747"/>
+        <location filename="mainwindow.cpp" line="783"/>
+        <location filename="mainwindow.cpp" line="819"/>
         <source>YES:: go heating .
  NO: DONOT HEATING</source>
         <translation>是: 启动加热
@@ -404,23 +404,15 @@
         <translation></translation>
     </message>
     <message>
-        <location filename="setting.ui" line="199"/>
-        <source>addItem</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="setting.ui" line="204"/>
-        <source>deleteItem</source>
+        <location filename="setting.cpp" line="141"/>
+        <location filename="setting.cpp" line="148"/>
+        <source>warning</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="setting.ui" line="209"/>
-        <source>alterItem</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="setting.ui" line="214"/>
-        <source>useItem</source>
+        <location filename="setting.cpp" line="141"/>
+        <location filename="setting.cpp" line="148"/>
+        <source>Name Not Define</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

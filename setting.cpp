@@ -12,17 +12,19 @@ Setting::Setting(QWidget *parent) :
     initAction();
 
     connect(ui->buttonBox,&QDialogButtonBox::accepted,[this](){
-        if(isUseThis) m_settings=&tempSData;
-        iniRSettings->beginGroup("Default");
-        iniRSettings->setValue("1Name",tempSData.Name);
-        iniRSettings->setValue("2OutD",tempSData.OutDiammm);
-        iniRSettings->setValue("3InnerD",tempSData.InnerDiammm);
-        iniRSettings->setValue("4HeatL",tempSData.Lengthmm);
-        iniRSettings->setValue("5HeatTemp",tempSData.HighTempe);
-        iniRSettings->setValue("6Rate",tempSData.RateofHeat);
-        iniRSettings->endGroup();
-        hide();
-    });
+        if(isUseThis)
+        {
+            m_settings=&tempSData;
+            iniRSettings->beginGroup("Default");
+            iniRSettings->setValue("1Name",tempSData.Name);
+            iniRSettings->setValue("2OutD",tempSData.OutDiammm);
+            iniRSettings->setValue("3InnerD",tempSData.InnerDiammm);
+            iniRSettings->setValue("4HeatL",tempSData.Lengthmm);
+            iniRSettings->setValue("5HeatTemp",tempSData.HighTempe);
+            iniRSettings->setValue("6Rate",tempSData.RateofHeat);
+            iniRSettings->endGroup();
+            hide();
+        }});
 
     tbSelectRow=-1;
     isUseThis=false;
@@ -87,28 +89,10 @@ void Setting::initUI()
 void Setting::initAction()
 {
     connect(ui->pbTreeviewAdd,&QPushButton::clicked,this,&Setting::addItem);
-    connect(ui->actionaddItem,&QAction::triggered,this,&Setting::addItem);
     connect(ui->pbTreeviewDel,&QPushButton::clicked,this,&Setting::deleteItem);
-    connect(ui->actiondeleteItem,&QAction::triggered,this,&Setting::deleteItem);
-
     connect(ui->pbTreeviewChg,&QPushButton::clicked,this,&Setting::changeItem);
-    connect(ui->actionalterItem,&QAction::triggered,this,&Setting::changeItem);
     connect(ui->pbUseCur,&QPushButton::clicked,this,&Setting::useCurrentItem);
-    connect(ui->actionuseItem,&QAction::triggered,this,&Setting::useCurrentItem);
-
     connect(ui->tvType,SIGNAL(clicked(const QModelIndex &)),this,SLOT(tableVClk(const QModelIndex &)));
-
-    tbRightMc=new QMenu(this);
-    tbRightMc->addAction(ui->actionaddItem);
-    tbRightMc->addAction(ui->actionuseItem);
-    tbRightMc->addAction(ui->actionalterItem);
-    tbRightMc->addAction(ui->actiondeleteItem);
-
-    ui->tvType->setContextMenuPolicy(Qt::CustomContextMenu);
-    connect(ui->tvType,&QPushButton::customContextMenuRequested,[=](const QPoint &pos)
-    {
-        tbRightMc->exec(QCursor::pos());
-    });
 }
 
 void Setting::addItem()
@@ -123,7 +107,7 @@ void Setting::addItem()
     m_model->setItem(insertRow,3,new QStandardItem(tempSData.Lengthmm));
     m_model->setItem(insertRow,4,new QStandardItem(tempSData.HighTempe));
     m_model->setItem(insertRow,5,new QStandardItem(tempSData.RateofHeat));
-
+    initUI();
 }
 
 void Setting::deleteItem()
@@ -133,7 +117,7 @@ void Setting::deleteItem()
         return;
     }
     iniRSettings->remove(tempSData.Name);
-    m_model->removeRows(tbSelectRow,1);
+    initUI();
 }
 
 void Setting::changeItem()
@@ -150,14 +134,18 @@ void Setting::changeItem()
 
 void Setting::useCurrentItem()
 {
-    isUseThis=!isUseThis;
-    ui->pbUseCur->setStyleSheet(isUseThis?"color: rgb(255, 0, 127);":"");
+    if(tbSelectRow>0){
+        isUseThis=!isUseThis;
+        ui->pbUseCur->setStyleSheet(isUseThis?"color: rgb(255, 0, 127);":"");
+    }else{
+        QMessageBox::information(nullptr, tr("warning"), tr("Name Not Define"));
+    }
 }
 
 void Setting::saveToSsd()
 {
     if(ui->leName->text()==nullptr){
-        QMessageBox::information(nullptr, "warning", "Name Not Define");
+        QMessageBox::information(nullptr, tr("warning"), tr("Name Not Define"));
         return;
     }
     tempSData.Name=ui->leName->text();
@@ -175,6 +163,7 @@ void Setting::saveToSsd()
     iniRSettings->setValue("5HeatTemp",tempSData.HighTempe);
     iniRSettings->setValue("6Rate",tempSData.RateofHeat);
     iniRSettings->endGroup();
+    initUI();
 }
 
 void Setting::tableVClk(const QModelIndex &index)

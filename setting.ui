@@ -194,26 +194,6 @@
     </widget>
    </item>
   </layout>
-  <action name="actionaddItem">
-   <property name="text">
-    <string>addItem</string>
-   </property>
-  </action>
-  <action name="actiondeleteItem">
-   <property name="text">
-    <string>deleteItem</string>
-   </property>
-  </action>
-  <action name="actionalterItem">
-   <property name="text">
-    <string>alterItem</string>
-   </property>
-  </action>
-  <action name="actionuseItem">
-   <property name="text">
-    <string>useItem</string>
-   </property>
-  </action>
  </widget>
  <resources/>
  <connections>

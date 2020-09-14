@@ -718,6 +718,7 @@ void MainWindow::on_pbIoOut1_clicked()
     if(mmessageBox->information(this,msgTitle,msgText,QMessageBox::Yes|QMessageBox::No)==QMessageBox::Yes){
         if(!isOpen1){
             productId++;
+            ui->leproducId1->setText(QString::number(productId));
             startT1=new QTime;
             startT1->start();
             startWPTime=QDateTime::currentDateTime();
@@ -753,6 +754,7 @@ void MainWindow::on_pbIoOut2_clicked()
 
         if(!isOpen2){
             productId++;
+            ui->leproducId2->setText(QString::number(productId));
             startT2=new QTime;
             startT2->start();
             if(yudianPort) wtMdb(11,m_setData->HighTempe.toDouble()*10);
@@ -788,6 +790,7 @@ void MainWindow::on_pbIoOut3_clicked()
 
         if(!isOpen3){
             productId++;
+            ui->leproducId3->setText(QString::number(productId));
             startT3=new QTime;
             startT3->start();
             if(yudianPort) wtMdb(12,m_setData->HighTempe.toDouble()*10);
@@ -823,6 +826,7 @@ void MainWindow::on_pbIoOut4_clicked()
 
         if(!isOpen4){
             productId++;
+            ui->leproducId4->setText(QString::number(productId));
             startT4=new QTime;
             startT4->start();
             if(yudianPort) wtMdb(13,m_setData->HighTempe.toDouble()*10);

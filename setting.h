@@ -46,7 +46,6 @@ private:
     QSettings *portSettings;
 
     QStandardItemModel *m_model;
-    QMenu *tbRightMc;
 
     int tbSelectRow;
     int m_yudianPort;
